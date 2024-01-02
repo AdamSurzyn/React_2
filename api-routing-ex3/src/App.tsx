@@ -4,7 +4,6 @@ import { Formik, Field } from "formik";
 import {
   Box,
   Button,
-  Select,
   Flex,
   FormControl,
   FormLabel,
@@ -14,7 +13,6 @@ import {
   ChakraProvider
 } from "@chakra-ui/react";
 import * as yup from "yup";
-import { json } from "stream/consumers";
 
 const phoneRegexp = /^\+\d{11}$/;
 const validationSchema = yup.object().shape({
@@ -30,6 +28,8 @@ const validationSchema = yup.object().shape({
       "Phone number must start with a + sign and be 11 characters long"
     ),
 });
+
+
 
 function App() {
   return (
