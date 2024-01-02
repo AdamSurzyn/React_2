@@ -19,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/profiles/:id",
     element: <Profile/>
+  },
+  {
+    path: "/profiles/add",
+    element: <App/>
   }
 ])
 const root = ReactDOM.createRoot(

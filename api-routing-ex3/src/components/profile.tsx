@@ -10,12 +10,6 @@ type Person = {
     id: number
 }
 
-
-//! Need to fix the url somehow!!!
-
-
-
-
 const Profile = () => {
     const {id} = useParams();
     const [person, setPerson] = useState< Person| null>(null)
