@@ -37,10 +37,24 @@ const reducer = (state: State, action: ActionType): State => {
   }
 };
 
+export default reducer;
+
+type NotificationContextProps = {
+  notifications: Notification[];
+};
+
+const NotificationContext = createContext<NotificationContextProps | null>(
+  null
+);
+const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [notifications, setNotifications] = useState([]);
+};
+
 /**
  *
  * Plan jest taki, ze:
  * Reducer bedzie uzyty przy przyciskach w komponencie 'profiles'
+ * Reducer w innym pliku?
  * Po kazdej zmianie bedzie szedl api call, zalezny od akcji do json-server
  * Przy kazdym dodaniu/edycji/usunieciu profilu, do contextu bedzie dodawane, ile jest zmian i jaka byla ostatnia zmiana() i jej czas
  * Context wyswietlany jako koleczko w ktoryms rogu, o kolorze zaleznie od zmiany, majac w srodku liczbe zmian. Po kliknieciu pokazuje sie czas zmiany w modalu. Zeby trackowac wszystkie zmiany, musze je trzymac w jakims arrayu.
