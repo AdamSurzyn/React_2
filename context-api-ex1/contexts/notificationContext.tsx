@@ -11,27 +11,26 @@ type Action = "INCREMENT" | "DECREMENT";
 type ActionType = {
   type: Action;
 };
-type State = {
-  count: number;
-};
 type Notification = {
   type: "added" | "removed" | "edited";
   read: boolean;
+  message: string;
 };
 type Notifications = Notification[];
 
-const initialState = { count: 0 };
-const actionTypes = {
-  INCREMENT: "INCREMENT",
-  DECREMENT: "DECREMENT",
-};
-
-const reducer = (state: State, action: ActionType): State => {
+const reducer = (state: Notifications, action: ActionType): Notifications => {
   switch (action.type) {
     case "INCREMENT":
-      return { count: state.count + 1 };
+      return [
+        ...state,
+        {
+          type: "added",
+          message: "An user has been added!",
+          read: false,
+        },
+      ];
     case "DECREMENT":
-      return { count: state.count - 1 };
+      return state;
     default:
       return state;
   }
@@ -40,14 +39,32 @@ const reducer = (state: State, action: ActionType): State => {
 export default reducer;
 
 type NotificationContextProps = {
-  notifications: Notification[];
+  notifications: Notifications;
+  setNotifications: Dispatch<SetStateAction<never[]>>;
 };
 
 const NotificationContext = createContext<NotificationContextProps | null>(
   null
 );
-const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+const NotificationsProvider = ({ children }: { children: React.ReactNode }) => {
   const [notifications, setNotifications] = useState([]);
+  return (
+    <NotificationContext.Provider value={{ notifications, setNotifications }}>
+      {children}
+    </NotificationContext.Provider>
+  );
+};
+
+export const useNotificationsContext = () => {
+  const ctx = useContext(NotificationContext);
+
+  if (!ctx) {
+    throw new Error(
+      "Missing notificationsContext, it's not wraped in ThemeProvider"
+    );
+  }
+
+  return ctx;
 };
 
 /**
