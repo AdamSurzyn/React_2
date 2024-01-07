@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Profiles from "./components/profiles";
 import Profile from "./components/profile";
+import { NotificationsProvider } from "./contexts/notificationContext";
+import { ThemeProvider } from "@emotion/react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +31,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <NotificationsProvider>
+      <RouterProvider router={router} />
+    </NotificationsProvider>
   </React.StrictMode>
 );
 

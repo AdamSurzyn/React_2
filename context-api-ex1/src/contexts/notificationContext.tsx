@@ -1,10 +1,4 @@
-import {
-  useContext,
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useContext, createContext, Dispatch, useReducer } from "react";
 import React from "react";
 
 type Action = "INCREMENT" | "DECREMENT";
@@ -17,6 +11,8 @@ type Notification = {
   message: string;
 };
 type Notifications = Notification[];
+
+const initialNotificationsState: [] | Notifications = [];
 
 const reducer = (state: Notifications, action: ActionType): Notifications => {
   switch (action.type) {
@@ -36,20 +32,26 @@ const reducer = (state: Notifications, action: ActionType): Notifications => {
   }
 };
 
-export default reducer;
-
 type NotificationContextProps = {
-  notifications: Notifications;
-  setNotifications: Dispatch<SetStateAction<never[]>>;
+  state: Notifications;
+  dispatch: Dispatch<ActionType>;
+  NotificationsCount: number;
 };
 
 const NotificationContext = createContext<NotificationContextProps | null>(
   null
 );
-const NotificationsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [notifications, setNotifications] = useState([]);
+export const NotificationsProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [state, dispatch] = useReducer(reducer, initialNotificationsState);
+  const NotificationsCount: number = state.length;
   return (
-    <NotificationContext.Provider value={{ notifications, setNotifications }}>
+    <NotificationContext.Provider
+      value={{ state, dispatch, NotificationsCount }}
+    >
       {children}
     </NotificationContext.Provider>
   );

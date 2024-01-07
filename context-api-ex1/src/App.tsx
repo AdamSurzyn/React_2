@@ -13,6 +13,7 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import * as yup from "yup";
+import { useNotificationsContext } from "./contexts/notificationContext";
 
 const phoneRegexp = /^\+\d{11}$/;
 const validationSchema = yup.object().shape({
@@ -30,8 +31,15 @@ const validationSchema = yup.object().shape({
 });
 
 function App() {
+  const { state, dispatch, NotificationsCount } = useNotificationsContext();
   return (
     <div className="App">
+      <div>{NotificationsCount}</div>
+      {state.length !== 0 ? (
+        <div>{state[0].message}</div>
+      ) : (
+        <div>No people have been added in this session</div>
+      )}
       <ChakraProvider>
         <Flex bg="gray.100" align="center" justify="center" h="100vh">
           <Box bg="white" p={6} rounded="md" w={64}>
@@ -53,6 +61,7 @@ function App() {
                   body: JSON.stringify(values),
                 });
                 const data = await response.json();
+                dispatch({ type: "INCREMENT" });
                 return data;
               }}
             >
