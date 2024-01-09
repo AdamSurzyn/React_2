@@ -12,7 +12,7 @@ type DataPerson = Person[];
 
 const Profiles = () => {
   const [data, setData] = useState<DataPerson | null>(null);
-  const [serverUrl, setServerUrl] = useState("http://localhost:8000/people");
+  const serverUrl = "http://localhost:8000/people";
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(serverUrl);
@@ -20,7 +20,7 @@ const Profiles = () => {
       setData(responseObj);
     }
     fetchData();
-  }, [serverUrl]);
+  }, []);
 
   return (
     <div>

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import * as yup from "yup";
 import { useNotificationsContext } from "./contexts/notificationContext";
-
+import NotificationCount from "./components/notificationCount";
 const phoneRegexp = /^\+\d{11}$/;
 const validationSchema = yup.object().shape({
   name: yup.string().min(5).required("This field is mendatory!"),
@@ -34,12 +34,9 @@ function App() {
   const { state, dispatch, NotificationsCount } = useNotificationsContext();
   return (
     <div className="App">
-      <div>{NotificationsCount}</div>
-      {state.length !== 0 ? (
-        <div>{state[0].message}</div>
-      ) : (
-        <div>No people have been added in this session</div>
-      )}
+      <NotificationCount
+        NotificationsCount={NotificationsCount}
+      ></NotificationCount>
       <ChakraProvider>
         <Flex bg="gray.100" align="center" justify="center" h="100vh">
           <Box bg="white" p={6} rounded="md" w={64}>
