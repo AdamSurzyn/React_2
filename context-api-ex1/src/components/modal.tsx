@@ -1,13 +1,55 @@
 import React from "react";
-import { Notification } from "../contexts/notificationContext";
+import {
+  Button,
+  Modal as ChakraModal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Text,
+} from "@chakra-ui/react";
 
-const Modal: React.FC<Notification> = ({ message, type, time }) => {
+type ModalProps = {
+  message: string;
+  type: string;
+  time: string;
+  onClose: () => void;
+  isOpen: boolean;
+};
+
+const Modal: React.FC<ModalProps> = ({
+  message,
+  type,
+  time,
+  onClose,
+  isOpen,
+}) => {
   return (
-    <div>
-      <div>{type}</div>
-      <div>{message}</div>
-      <div>{time}</div>
-    </div>
+    <ChakraModal
+      blockScrollOnMount={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      size="md"
+      motionPreset="scale"
+      isCentered
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader borderBottomWidth="1px">{type}</ModalHeader>
+        <ModalCloseButton color="black" />
+        <ModalBody>
+          <Text fontWeight="bold" mb="1rem">
+            {message}
+          </Text>
+          <Text>{time}</Text>
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="blue" onClick={onClose}></Button>
+        </ModalFooter>
+      </ModalContent>
+    </ChakraModal>
   );
 };
 

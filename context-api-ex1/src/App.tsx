@@ -31,12 +31,10 @@ const validationSchema = yup.object().shape({
 });
 
 function App() {
-  const { state, dispatch, NotificationsCount } = useNotificationsContext();
+  const { dispatch } = useNotificationsContext();
   return (
     <div className="App">
-      <NotificationCount
-        NotificationsCount={NotificationsCount}
-      ></NotificationCount>
+      <NotificationCount></NotificationCount>
       <ChakraProvider>
         <Flex bg="gray.100" align="center" justify="center" h="100vh">
           <Box bg="white" p={6} rounded="md" w={64}>

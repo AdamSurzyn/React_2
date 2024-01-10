@@ -7,7 +7,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Profiles from "./components/profiles";
 import Profile from "./components/profile";
 import { NotificationsProvider } from "./contexts/notificationContext";
-import { ThemeProvider } from "@emotion/react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +25,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
 ]);
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
