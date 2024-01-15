@@ -10,20 +10,18 @@ import {
 } from "@chakra-ui/react";
 import { useModalFormConfirmationContext } from "../contexts/modalFormConfirmationContext";
 type ModalProps = {
-  onClose: () => boolean;
-  isOpen: boolean;
+
 };
 
-const Modal: React.FC<ModalProps> = () => {
-  const { showModal, setShowModal } = useModalFormConfirmationContext();
-  const handleShowButton = () => {
-    setShowModal((showModal) => !showModal);
-  };
+
+
+const ModalForm: React.FC = () => {
+  const {showModal, toggleShowModal} = useModalFormConfirmationContext()
   return (
     <ChakraModal
       blockScrollOnMount={false}
       isOpen={showModal}
-      onClose={handleShowButton}
+      onClose={toggleShowModal}
       size="md"
       motionPreset="scale"
       isCentered
@@ -35,8 +33,8 @@ const Modal: React.FC<ModalProps> = () => {
           <Text>Do you wish to continue?</Text>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={handleShowButton}>
-            Close
+          <Button colorScheme="blue" onClick={toggleShowModal}>
+            Always
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -44,4 +42,4 @@ const Modal: React.FC<ModalProps> = () => {
   );
 };
 
-export default Modal;
+export default ModalForm;

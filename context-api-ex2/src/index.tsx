@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Profiles from "./components/profiles";
 import Profile from "./components/profile";
 import { NotificationsProvider } from "./contexts/notificationContext";
+import { ModalFormConfirmationProvider } from "./contexts/modalFormConfirmationContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,9 +32,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <ModalFormConfirmationProvider>
     <NotificationsProvider>
       <RouterProvider router={router} />
     </NotificationsProvider>
+    </ModalFormConfirmationProvider>
   </React.StrictMode>
 );
 

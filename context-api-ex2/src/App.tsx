@@ -15,6 +15,8 @@ import {
 import * as yup from "yup";
 import { useNotificationsContext } from "./contexts/notificationContext";
 import NotificationCount from "./components/notificationCount";
+import { ModalFormConfirmationProvider, useModalFormConfirmationContext } from "./contexts/modalFormConfirmationContext";
+import ModalForm from "./components/modalFormConfirmation";
 const phoneRegexp = /^\+\d{11}$/;
 const validationSchema = yup.object().shape({
   name: yup.string().min(5).required("This field is mendatory!"),
@@ -32,8 +34,10 @@ const validationSchema = yup.object().shape({
 
 function App() {
   const { dispatch } = useNotificationsContext();
+  const { showModal, toggleShowModal} = useModalFormConfirmationContext();
   return (
     <div className="App">
+      <ModalForm></ModalForm>
       <NotificationCount></NotificationCount>
       <ChakraProvider>
         <Flex bg="gray.100" align="center" justify="center" h="100vh">
@@ -48,8 +52,10 @@ function App() {
                 phonenumber: 0,
               }}
               validationSchema={validationSchema}
+
               onSubmit={async (values) => {
                 //! Jako, ze aplikacja jest na porcie 3000, uzywam portu 8000
+                toggleShowModal()
                 const response = await fetch(`http://localhost:8000/people`, {
                   method: "POST",
                   headers: { "Content-type": "application/json;charset=UTF-8" },
@@ -57,7 +63,7 @@ function App() {
                 });
                 const data = await response.json();
                 dispatch({ type: "INCREMENT" });
-                return data;
+                
               }}
             >
               {({ handleSubmit, errors, touched }) => (

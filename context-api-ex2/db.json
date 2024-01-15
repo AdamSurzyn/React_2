@@ -8,69 +8,6 @@
       "imglink": "",
       "phonenumber": "+48010101010",
       "id": 1
-    },
-    {
-      "name": "adada",
-      "age": 31,
-      "city": "szczcz",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+48888888888",
-      "id": 2
-    },
-    {
-      "name": "sadada",
-      "age": 30,
-      "city": "zczczcz",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+48888888888",
-      "id": 3
-    },
-    {
-      "name": "Sczcz",
-      "age": 30,
-      "city": "szczczc",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+48888888887",
-      "id": 4
-    },
-    {
-      "name": "Sczcz",
-      "age": 30,
-      "city": "szczczc",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+48888888887",
-      "id": 5
-    },
-    {
-      "name": "Sczcz",
-      "age": 30,
-      "city": "szczczc",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+48888888887",
-      "id": 6
-    },
-    {
-      "name": "Sczcz",
-      "age": 30,
-      "city": "szczczc",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+48888888887",
-      "id": 7
-    },
-    {
-      "name": "Szczcz",
-      "age": 30,
-      "city": "Szczcz",
-      "volountary": false,
-      "imglink": "",
-      "phonenumber": "+12312312340",
-      "id": 8
     }
   ]
 }
