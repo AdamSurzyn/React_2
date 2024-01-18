@@ -10,12 +10,14 @@ import {
   Input,
   VStack,
   ChakraProvider,
+  Tag,
 } from "@chakra-ui/react";
 import * as yup from "yup";
 import { useNotificationsContext } from "../contexts/notificationContext";
 import NotificationCount from "./notificationCount";
 import { useModalFormConfirmationContext } from "../contexts/modalFormConfirmationContext";
 import ModalForm from "./modalFormConfirmation";
+import { Link } from "react-router-dom";
 const phoneRegexp = /^\+\d{11}$/;
 const validationSchema = yup.object().shape({
   name: yup.string().min(5).required("This field is mendatory!"),
@@ -60,6 +62,10 @@ const InputForm = () => {
       <ChakraProvider>
         <Flex bg="gray.100" align="center" justify="center" h="100vh">
           <Box bg="white" p={6} rounded="md" w={64}>
+            <Tag colorScheme="purple" variant="solid">
+              <Link to="login">Log in First!</Link>
+            </Tag>
+
             <Formik
               initialValues={{
                 name: "",

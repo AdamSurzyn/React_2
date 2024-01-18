@@ -12,6 +12,8 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../store";
 const validationSchema = yup.object().shape({
   login: yup.string().min(5).required("You need to put in your login!"),
   password: yup
@@ -22,53 +24,67 @@ const validationSchema = yup.object().shape({
 });
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const loginState = useSelector((state: { value: boolean }) => state.value);
   return (
     <div>
       <ChakraProvider>
         <Flex bg="gray.100" align="center" justify="center" h="100vh">
           <Box bg="white" p={6} rounded="md" w={64}>
-            <Formik
-              initialValues={{
-                login: "",
-                password: "",
-              }}
-              validationSchema={validationSchema}
-              onSubmit={async () => {}}
-            >
-              {({ handleSubmit, errors, touched }) => (
-                <form onSubmit={handleSubmit}>
-                  <VStack spacing={4} align="flex-start">
-                    <FormControl isInvalid={!!errors.login && touched.login}>
-                      <FormLabel htmlFor="login">Login</FormLabel>
-                      <Field
-                        as={Input}
-                        id="login"
-                        name="login"
-                        type="text"
-                        variant="filled"
-                      ></Field>
-                      <FormErrorMessage>{errors.password}</FormErrorMessage>
-                    </FormControl>
-                    <FormControl
-                      isInvalid={!!errors.password && touched.password}
-                    >
-                      <FormLabel htmlFor="password">Password</FormLabel>
-                      <Field
-                        as={Input}
-                        id="password"
-                        name="password"
-                        type="number"
-                        variant="filled"
-                      ></Field>
-                      <FormErrorMessage>{errors.password}</FormErrorMessage>
-                    </FormControl>
-                    <Button type="submit" colorScheme="purple" width="full">
-                      Login
-                    </Button>
-                  </VStack>
-                </form>
-              )}
-            </Formik>
+            {!loginState ? (
+              <Formik
+                initialValues={{
+                  login: "",
+                  password: "",
+                }}
+                validationSchema={validationSchema}
+                onSubmit={async () => {
+                  dispatch(login());
+                }}
+              >
+                {({ handleSubmit, errors, touched }) => (
+                  <form onSubmit={handleSubmit}>
+                    <VStack spacing={4} align="flex-start">
+                      <FormControl isInvalid={!!errors.login && touched.login}>
+                        <FormLabel htmlFor="login">Login</FormLabel>
+                        <Field
+                          as={Input}
+                          id="login"
+                          name="login"
+                          type="text"
+                          variant="filled"
+                        ></Field>
+                        <FormErrorMessage>{errors.password}</FormErrorMessage>
+                      </FormControl>
+                      <FormControl
+                        isInvalid={!!errors.password && touched.password}
+                      >
+                        <FormLabel htmlFor="password">Password</FormLabel>
+                        <Field
+                          as={Input}
+                          id="password"
+                          name="password"
+                          type="text"
+                          variant="filled"
+                        ></Field>
+                        <FormErrorMessage>{errors.password}</FormErrorMessage>
+                      </FormControl>
+                      <Button type="submit" colorScheme="purple" width="full">
+                        Login
+                      </Button>
+                    </VStack>
+                  </form>
+                )}
+              </Formik>
+            ) : (
+              <Button
+                colorScheme="purple"
+                width="full"
+                onClick={() => dispatch(logout())}
+              >
+                Log out
+              </Button>
+            )}
           </Box>
         </Flex>
       </ChakraProvider>

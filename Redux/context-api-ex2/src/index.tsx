@@ -9,6 +9,8 @@ import Profile from "./components/profile";
 import { NotificationsProvider } from "./contexts/notificationContext";
 import { ModalFormConfirmationProvider } from "./contexts/modalFormConfirmationContext";
 import LoginForm from "./components/loginForm";
+import { store } from "./store";
+import { Provider } from "react-redux";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,11 +39,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ModalFormConfirmationProvider>
-      <NotificationsProvider>
-        <RouterProvider router={router} />
-      </NotificationsProvider>
-    </ModalFormConfirmationProvider>
+    <Provider store={store}>
+      <ModalFormConfirmationProvider>
+        <NotificationsProvider>
+          <RouterProvider router={router} />
+        </NotificationsProvider>
+      </ModalFormConfirmationProvider>
+    </Provider>
   </React.StrictMode>
 );
 
