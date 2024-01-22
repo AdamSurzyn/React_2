@@ -14,6 +14,7 @@ import {
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../store";
+import { Link } from "react-router-dom";
 const validationSchema = yup.object().shape({
   login: yup.string().min(5).required("You need to put in your login!"),
   password: yup
@@ -77,13 +78,16 @@ const LoginForm = () => {
                 )}
               </Formik>
             ) : (
-              <Button
-                colorScheme="purple"
-                width="full"
-                onClick={() => dispatch(logout())}
-              >
-                Log out
-              </Button>
+              <div>
+                <Link to="/">Go to Main page!</Link>
+                <Button
+                  colorScheme="purple"
+                  width="full"
+                  onClick={() => dispatch(logout())}
+                >
+                  Log out
+                </Button>
+              </div>
             )}
           </Box>
         </Flex>
