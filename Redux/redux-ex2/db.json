@@ -1,0 +1,31 @@
+{
+  "people": [
+    {
+      "name": "FirstPerson",
+      "age": 19,
+      "city": "Szczecece",
+      "volountary": false,
+      "imglink": "",
+      "phonenumber": "+48010101010",
+      "id": 1
+    },
+    {
+      "name": "szczcz",
+      "age": 30,
+      "city": "szczcz",
+      "volountary": false,
+      "imglink": "",
+      "phonenumber": "+11111111111",
+      "id": 2
+    },
+    {
+      "name": "szczcz",
+      "age": 30,
+      "city": "szczcz",
+      "volountary": false,
+      "imglink": "",
+      "phonenumber": "+11111111111",
+      "id": 3
+    }
+  ]
+}
